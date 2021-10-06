@@ -1,6 +1,6 @@
 import createStyles from "@style-xper/style-xper-jss";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useStore } from "../utils/Store";
 import AddNewDialog from "./AddNewDialog";
 import Button from "./Button";
@@ -12,7 +12,8 @@ const styles = createStyles({
     backgroundColor: "#fff",
 
     boxShadow: "0 25px 50px -10px rgb(100 44 0 / 7%)",
-    position: "relative",
+    position: "sticky",
+    top: "0px",
     display: "flex",
   },
   logo: {
@@ -28,6 +29,7 @@ const styles = createStyles({
 });
 
 export default function Header() {
+  const location = useLocation();
   const showReelList = useStore((store) => store?.state?.showReelList ?? []);
   const [openNewDialog, setNewDialog] = React.useState(false);
 
@@ -45,7 +47,7 @@ export default function Header() {
         <p className={styles.logo}>ShowreelaX</p>
       </Link>
       <div className={styles?.buttonSlot}>
-        {!!showReelList?.length && (
+        {!!showReelList?.length && location.pathname === "/" && (
           <Button onClick={handleOpenDialog}>+ New Showreel</Button>
         )}
       </div>

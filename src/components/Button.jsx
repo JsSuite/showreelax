@@ -15,19 +15,21 @@ const styles = createStyles({
     cursor: "pointer",
     margin: "4px",
   },
-  buttonSec: {
+  secondary: {
     background: "white",
     color: "var(--primary)",
     border: "solid 2px var(--primary)",
+  },
+  danger: {
+    background: "#ff1717",
+    color: "white",
   },
 });
 
 export default function Button({ children, variant = "primary", ...props }) {
   return (
     <button
-      className={
-        styles?.button + (variant === "secondary" ? ` ${styles.buttonSec}` : "")
-      }
+      className={styles?.button + (!!variant ? ` ${styles?.[variant]}` : "")}
       {...props}>
       {children}
     </button>
