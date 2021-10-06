@@ -1,5 +1,4 @@
 import createStyles from "@style-xper/style-xper-jss";
-import React from "react";
 
 const styles = createStyles({
   dialog: {

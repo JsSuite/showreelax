@@ -1,12 +1,11 @@
-export default function FilmingSvg() {
+export default function FilmingSvg({ width }) {
   return (
     <svg
       id="ea1a5787-4807-42ae-aba3-2738e8ad7f96"
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      width="1150.44"
-      height="675.56"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      width={width ?? "500"}
       viewBox="0 0 1150.44 675.56">
       <defs>
         <linearGradient
