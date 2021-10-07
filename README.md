@@ -7,17 +7,16 @@
 
 <hr/>
 
-
-
-
-
 ## ⭐ Public Url
 
-N.A
+https://showreelax.netlify.app
 
 ## 📚 Tech Stack
 
-N.A
+- ReactJS (UI rendering)
+- React-Router (SPA Routing)
+- Zustand (State management)
+- @Style-Xper/Style-Xper-JSS (For Styling)
 
 ## 📸 Screenshots
 
@@ -26,16 +25,14 @@ N.A
 ## 📜 Scripts
 
 ```sh
-start : $ react-scripts start
-build : $ react-scripts build
-test : $ react-scripts test
-eject : $ react-scripts eject
+start : $ yarn start
+build : $ yarn build
+test : $ yarn test
+eject : $ yarn eject
 
 ```
 
 ## 🔑 Keywords
-
-
 
 ## 👾 Submit issues at
 
@@ -47,14 +44,17 @@ This project does not have a license.
 
 ## Dependencies
 
- - @testing-library/jest-dom : $ ^5.11.4
- - @testing-library/react : $ ^11.1.0
- - @testing-library/user-event : $ ^12.1.10
- - react : $ ^17.0.2
- - react-dom : $ ^17.0.2
- - react-scripts : $ 4.0.3
- - web-vitals : $ ^1.0.1
-
+- @style-xper/style-xper-jss : $ ^1.0.0
+- @testing-library/jest-dom : $ ^5.11.4
+- @testing-library/react : $ ^11.1.0
+- @testing-library/user-event : $ ^12.1.10
+- react : $ ^17.0.2
+- react-dom : $ ^17.0.2
+- react-router-dom : $ ^5.3.0
+- react-scripts : $ 4.0.3
+- uuid : $ ^8.3.2
+- web-vitals : $ ^1.0.1
+- zustand : $ ^3.5.12
 
 ## Dev Dependencies
 
