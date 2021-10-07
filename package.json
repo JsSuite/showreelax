@@ -1,6 +1,7 @@
 {
   "name": "showreelax",
   "description": "A showreel maker for you to sit back and relax",
+  "author": "m3yevn",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

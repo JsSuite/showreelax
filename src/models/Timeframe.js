@@ -66,4 +66,4 @@ class Timeframe {
   }
 }
 
-module.exports = Timeframe;
+export default Timeframe;
