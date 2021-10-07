@@ -56,13 +56,14 @@ export default function ShowReelList() {
               <Card onClick={handleRedirectToDetail(showReel?.id)}>
                 <FilmingSvg width={300} />
                 <div className={styles?.subTitle}>{showReel?.name}</div>
+                <div>Total Duration: {showReel?.totalDuration}</div>
               </Card>
             </div>
           ))}
       </div>
       {!showReelList?.length && (
         <div className={styles?.emptyContainer}>
-          <FilmingSvg />
+          <FilmingSvg width={300} />
           <p className={styles?.logo}>
             There is no showreel. Please create one.
           </p>

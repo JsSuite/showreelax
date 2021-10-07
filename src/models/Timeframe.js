@@ -1,7 +1,8 @@
 const FPS_CONST = {
-  PAL: 40,
-  NTSC: 33.33,
+  PAL: Math.ceil((1 / 25) * 1000),
+  NTSC: Math.ceil((1 / 30) * 1000),
 };
+
 class Timeframe {
   constructor(props, type) {
     this.type = type;

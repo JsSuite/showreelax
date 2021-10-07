@@ -111,6 +111,12 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
     });
   };
 
+  const handleClose = () => {
+    setPage("summary");
+    setNewReel(NEWREEL_CONST);
+    onClose();
+  };
+
   const handleCreate = (e) => {
     e.preventDefault();
     if (newReel?.name === "" || !newReel?.clips?.length) {
@@ -131,10 +137,7 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
 
     const concattedList = showReelList.concat(addingReel);
     setState({ showReelList: concattedList });
-
-    setPage("summary");
-    setNewReel(NEWREEL_CONST);
-    onClose();
+    handleClose();
   };
 
   const handleChooseClips = () => {
@@ -179,8 +182,17 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
   };
 
   const handleSeeMore = (index, seeMore) => () => {
-    const clonedClips = JSON.parse(JSON.stringify(filteredClips));
+    const clonedClips = JSON.parse(
+      JSON.stringify(
+        filteredClips.map((v) => ({ ...v, duration: v.duration.toString() }))
+      )
+    );
     clonedClips[index].seeMore = seeMore;
+
+    clonedClips.forEach((clip) => {
+      clip.duration = new Timeframe(clip.duration, clip.standard);
+    });
+
     setFilteredClips(clonedClips);
   };
 
@@ -198,6 +210,7 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
               <div>Name</div>
               <input
                 id="name"
+                data-testid="AddNewDialog.Name"
                 className={styles.input}
                 value={newReel?.name}
                 onChange={handleChangeNewReel}
@@ -214,6 +227,7 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
               <div>Video Standard</div>
               <select
                 id="standard"
+                data-testid="AddNewDialog.Standard"
                 className={styles.select}
                 value={newReel?.standard ?? ""}
                 onChange={handleChangeNewReel}>
@@ -225,6 +239,7 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
               <div>Video Definition</div>
               <select
                 id="definition"
+                data-testid="AddNewDialog.Definition"
                 className={styles.select}
                 value={newReel?.definition ?? ""}
                 onChange={handleChangeNewReel}>
@@ -233,8 +248,12 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
               </select>
             </div>
             <div className={styles.dialogAction}>
-              <Button onClick={handleChooseClips}>{"> Next"}</Button>
-              <Button variant="secondary" onClick={onClose}>
+              <Button
+                onClick={handleChooseClips}
+                data-testid="AddNewDialog.Next">
+                {"> Next"}
+              </Button>
+              <Button variant="secondary" onClick={handleClose}>
                 Cancel
               </Button>
             </div>
@@ -248,17 +267,18 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
             <div className={styles?.clipsPanel}>
               {!!filteredClips?.length &&
                 filteredClips.map((clip, index) => (
-                  <Card dense kye={clip?.id}>
+                  <Card dense key={index}>
                     <div className={styles?.checkboxWrapper}>
-                      <label class="checkbox-input">
+                      <label className="checkbox-input">
                         {clip?.name}
                         <input
+                          data-testid="AddNewDialog.Clips.Checkbox"
                           type="checkbox"
                           name={`${clip?.id}`}
                           checked={newReel.clips.includes(`${clip.id}`)}
                           onChange={handleClipChange}
                         />
-                        <span class="checkmark"></span>
+                        <span className="checkmark"></span>
                       </label>
                     </div>
                     <div className={styles?.desc}>
@@ -287,7 +307,17 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
                       )}
                     </div>
                     <div className={styles?.desc}>
-                      Duration: {clip.duration.toString()}
+                      <strong>Duration: {clip.duration.toString()}</strong>
+                    </div>
+                    <div className={styles?.desc}>
+                      <strong data-testid="AddNewDialog.Clips.Standard">
+                        Standard: {clip.standard}
+                      </strong>
+                    </div>
+                    <div
+                      className={styles?.desc}
+                      data-testid="AddNewDialog.Clips.Definition">
+                      <strong>Definition: {clip.definition}</strong>
                     </div>
                   </Card>
                 ))}
@@ -300,7 +330,7 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
               )}
             </label>
             <div>
-              <strong>
+              <strong data-testid="AddNewDialog.Clips.TotalDuration">
                 Total Duration of Showreel: {newReel.totalDuration.toString()}
               </strong>
             </div>
@@ -309,7 +339,7 @@ export default function AddNewDialog({ onClose = () => {}, open, ...props }) {
               <Button variant="secondary" onClick={handleUpdateSummary}>
                 {"< Back"}
               </Button>
-              <Button variant="secondary" onClick={onClose}>
+              <Button variant="secondary" onClick={handleClose}>
                 Cancel
               </Button>
             </div>

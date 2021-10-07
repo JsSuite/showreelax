@@ -163,8 +163,15 @@ export default function ShowReelDetail(props) {
   };
 
   const handleSeeMore = (index, seeMore) => () => {
-    const clonedClips = JSON.parse(JSON.stringify(filteredClips));
+    const clonedClips = JSON.parse(
+      JSON.stringify(
+        filteredClips.map((v) => ({ ...v, duration: v.duration.toString() }))
+      )
+    );
     clonedClips[index].seeMore = seeMore;
+    clonedClips.forEach((clip) => {
+      clip.duration = new Timeframe(clip.duration, clip.standard);
+    });
     setFilteredClips(clonedClips);
   };
 
@@ -198,6 +205,14 @@ export default function ShowReelDetail(props) {
     };
     setState({ showReelList: clonedList });
     history.push("/");
+  };
+
+  const handleCancel = () => {
+    history.push("/");
+  };
+
+  const handleDiscard = () => {
+    setDetail(selectedShowReel);
   };
 
   return (
@@ -296,7 +311,13 @@ export default function ShowReelDetail(props) {
                         )}
                       </div>
                       <div className={styles?.desc}>
-                        Duration: {clip.duration.toString()}
+                        <strong>Duration: {clip.duration.toString()}</strong>
+                      </div>
+                      <div className={styles?.desc}>
+                        <strong>Standard: {clip.standard}</strong>
+                      </div>
+                      <div className={styles?.desc}>
+                        <strong>Definition: {clip.definition}</strong>
                       </div>
                     </Card>
                   ))}
@@ -311,10 +332,23 @@ export default function ShowReelDetail(props) {
               </label>
             </div>
             <div className={styles.dialogAction}>
-              <Button onClick={handleUpdateShowReel}>{`Save & Exit`}</Button>
-              <Button variant="danger" onClick={handleDeleteShowReel}>
-                Delete
-              </Button>
+              <div className="row">
+                <div className="col-md-6 col-12">
+                  <Button
+                    variant="secondary"
+                    onClick={handleCancel}>{`Cancel`}</Button>
+
+                  <Button
+                    variant="secondary"
+                    onClick={handleDiscard}>{`Discard`}</Button>
+                </div>
+                <div className="col-md-6 col-12">
+                  <Button onClick={handleUpdateShowReel}>{`Save`}</Button>
+                  <Button variant="danger" onClick={handleDeleteShowReel}>
+                    Delete
+                  </Button>
+                </div>
+              </div>
             </div>
           </Card>
         </div>

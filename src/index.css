@@ -9,6 +9,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+}
+
 :root {
   --primary: rgb(0, 98, 156);
 }
@@ -23,12 +29,15 @@ a {
 }
 
 .backdrop {
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
+  z-index: 3;
+  display: none;
+  position: fixed;
   left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;

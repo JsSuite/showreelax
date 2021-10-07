@@ -1,20 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-const modalRoot = document.getElementById("modal-root");
-
 export default class Modal extends React.Component {
   constructor(props) {
     super(props);
+    this.root = document.getElementById("root");
     this.el = document.createElement("div", {});
     this.el.classList.add("backdrop");
   }
 
   componentDidMount() {
-    modalRoot.appendChild(this.el);
+    this.root.appendChild(this.el);
+    document.body.style.overflowY = "hidden";
   }
 
   componentWillUnmount() {
-    modalRoot.removeChild(this.el);
+    this.root.removeChild(this.el);
+    document.body.style.overflowY = "auto";
   }
 
   render() {
