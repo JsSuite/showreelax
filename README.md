@@ -3,7 +3,7 @@
 **A showreel maker for you to sit back and relax**
 
 <p>Version 0.1.0</p>
-<p>by </p>
+<p>by m3yevn</p>
 
 <hr/>
 
@@ -17,6 +17,7 @@ https://showreelax.netlify.app
 - React-Router (SPA Routing)
 - Zustand (State management)
 - @Style-Xper/Style-Xper-JSS (For Styling)
+- Undraw (For image)
 
 ## 📸 Screenshots
 
@@ -25,10 +26,10 @@ N.A
 ## 📜 Scripts
 
 ```sh
-start : $ yarn start
-build : $ yarn build
-test : $ yarn test
-eject : $ yarn eject
+start : $ react-scripts start
+build : $ react-scripts build
+test : $ react-scripts test
+eject : $ react-scripts eject
 
 ```
 
